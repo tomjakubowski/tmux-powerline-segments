@@ -5,7 +5,6 @@
 
 require "net/http"
 require "json"
-require "ap"
 
 location = "12795773"
 unit = "f"
