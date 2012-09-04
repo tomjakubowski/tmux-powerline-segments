@@ -36,11 +36,15 @@ def cached_conditions(tmp_file)
   JSON.parse(File.read(tmp_file))
 end
 
+def cache_conditions(conditions, tmp_file)
+  File.open(tmp_file, 'w') { |f| f.write(conditions.to_json) }
+end
+
 if File.exists?(tmp_file) && cache_fresh?(tmp_file)
-  puts "cache is fresh"
   cond = cached_conditions(tmp_file)
 else
   cond = conditions(location)
+  cache_conditions(cond, tmp_file)
 end
 
 puts format(cond, unit)
